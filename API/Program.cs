@@ -20,6 +20,9 @@ builder.Services.AddDbContext<StoreContext>(opt => {
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); // register generic type of service
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
+// Inject AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
