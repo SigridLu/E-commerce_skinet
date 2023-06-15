@@ -32,6 +32,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Configure to serve static files
+app.UseStaticFiles();
+
 app.UseAuthorization();
 
 app.MapControllers();
