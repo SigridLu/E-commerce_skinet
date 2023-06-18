@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 
 namespace Core.Contract.Repository
 {
+    // For Demo Generic Repo w/t Specification pattern
     public interface IRepository<T>
     {
          IReadOnlyList<T> ListAllAsync();
