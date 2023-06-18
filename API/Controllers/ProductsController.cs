@@ -1,4 +1,5 @@
 using API.Dtos;
+using API.Errors;
 using AutoMapper;
 using Core.Contract.Repository;
 using Core.Entities;
@@ -9,9 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController : ControllerBase
+    public class ProductsController : BaseApiController
     {
         private readonly IGenericRepository<Product> _productsRepo;
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
@@ -39,11 +38,15 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
+        // Document the 2 response types in Swagger for the user to know the expect response types of this endpoint.
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
             var product =  await _productsRepo.GetEntityWithSpec(spec);
-
+            if (product == null)
+                return NotFound(new ApiResponse(404)); // retrun consistent error response
             return _mapper.Map<Product, ProductToReturnDto>(product);
         }
 
