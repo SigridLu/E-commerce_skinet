@@ -3,6 +3,7 @@ namespace Core.Specification
     // This class is to set the paramters for odering, filtering, and paging in Product controller to take.
     public class ProductSpecParams
     {
+        // Paging
         private const int MaxPageSize = 50;
         public int PageIndex { get; set; } = 1;
 
@@ -13,8 +14,17 @@ namespace Core.Specification
             set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
         }
 
+        // Sorting and filtering
         public int? BrandId { get; set; }
         public int? TypeId { get; set; }
         public string Sort { get; set; }
+        
+        // Searching
+        private string _search;
+        public string Search
+        {
+            get => _search;
+            set => _search = value.ToLower();
+        }
     }
 }
