@@ -33,6 +33,11 @@ namespace Infrastructure.Data.Repository
             return await ApplySpecification(spec).ToListAsync();
         }
 
+        public async Task<int> CountAsync(ISpecification<T> spec)
+        {
+            return await ApplySpecification(spec).CountAsync();
+        }
+
         // Return a generic type of IQueryable that has been applied the specification
         // The specification aggregates the Include methods to apply to the IQueryable data
         private IQueryable<T> ApplySpecification(ISpecification<T> spec)

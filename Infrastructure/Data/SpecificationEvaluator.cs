@@ -11,11 +11,13 @@ namespace Infrastructure.Data
         {
             var query = inputQuery;
 
+            // Filtering
             if (spec.Criteria != null)
             {
                 query = query.Where(spec.Criteria);
             }
 
+            // Ordering
             if (spec.OrderBy != null)
             {
                 query = query.OrderBy(spec.OrderBy);
@@ -24,6 +26,12 @@ namespace Infrastructure.Data
             if (spec.OrderByDescending != null)
             {
                 query = query.OrderByDescending(spec.OrderByDescending);
+            }
+
+            // Pagination should happend at the end of query operations after filtering and ordering.
+            if (spec.IsPaginationEnabled)
+            {
+                query = query.Skip(spec.Skip).Take(spec.Take);
             }
 
             // aggregates a list of Include methods and passes to the IQuerable variable

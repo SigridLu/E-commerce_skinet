@@ -11,5 +11,8 @@ namespace Core.Contract.Repository
         // Specification in place for adding Include method to generic Iqueryable data.
         Task<T> GetEntityWithSpec(ISpecification<T> spec);
         Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
+
+        // Specification in place for counting the number of items return from data.
+        Task<int> CountAsync(ISpecification<T> spec);
     }
 }
