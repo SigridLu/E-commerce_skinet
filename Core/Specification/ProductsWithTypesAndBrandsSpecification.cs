@@ -7,7 +7,11 @@ namespace Core.Specification
     {
         // For generic ListAsync method (that get all products with its type and brand)
         // to add include method to its Iqueryable data.
-        public ProductsWithTypesAndBrandsSpecification(string sort)
+
+        // Use the parametered constructor that accepts a parameter criteria to attach Where clause to Expression tree for filtering based on brandId and typeId
+        public ProductsWithTypesAndBrandsSpecification(string sort, int? brandId, int? typeId) : base( x =>
+            (!brandId.HasValue || x.ProductBrandId == brandId) && 
+            (!typeId.HasValue || x.ProductTypeId == typeId))
         {
             AddInclude(x => x.ProductType);
             AddInclude(x => x.ProductBrand);

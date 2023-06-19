@@ -10,13 +10,13 @@ namespace Core.Specification
             Criteria = criteria;
         }
 
-        public Expression<Func<T, bool>> Criteria { get; }
+        public Expression<Func<T, bool>> Criteria { get; } // Where clause
 
-        public List<Expression<Func<T, object>>> Includes { get; } = new List<Expression<Func<T, object>>>();
+        public List<Expression<Func<T, object>>> Includes { get; } = new List<Expression<Func<T, object>>>(); // Include clause
 
-        public Expression<Func<T, object>> OrderBy { get; private set; } // set in this class
+        public Expression<Func<T, object>> OrderBy { get; private set; } // set in this class, OrderBy clause
 
-        public Expression<Func<T, object>> OrderByDescending { get; private set; } // set in this class
+        public Expression<Func<T, object>> OrderByDescending { get; private set; } // set in this class, OrderByDescending clause
 
         protected void AddInclude(Expression<Func<T, object>> includeExpression)
         {
