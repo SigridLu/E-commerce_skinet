@@ -49,6 +49,15 @@ namespace API.Extensions
                 };
             });
 
+            // Inject and config CORS to allow Angular client applicaiton to access resources
+            services.AddCors( opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy => 
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                });
+            });
+
             return services;
         }
     }

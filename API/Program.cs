@@ -32,6 +32,8 @@ app.UseSwaggerUI();
 // Configure to serve static files
 app.UseStaticFiles();
 
+// Use middleware to setup CORS, CORS should be set above Authorization
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
 app.MapControllers();
 
