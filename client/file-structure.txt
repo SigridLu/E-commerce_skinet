@@ -1,0 +1,10 @@
+App Module
+    - Core Module (Layout)
+        -> Singletons: like NavBar
+    - Share Module
+        -> Shared components:
+            Anything we need to use in more than 1 feature module
+            In order to use the shared components, the feature module needs to import such components before using them.
+    - Feature Modules
+        -> App features:
+            Each feature has its own module and routing
