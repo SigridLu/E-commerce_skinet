@@ -24,15 +24,17 @@
     <section class="col-9">
       <!-- search bar -->
       <div class="d-flex justify-content-between align-items-center pb-2">
+        <!-- input from child app-paging-header -->
         <app-paging-header
           [totalCount]="totalCount"
           [pageNumber]="shopParams.pageNumber"
           [pageSize]="shopParams.pageSize"
         ></app-paging-header>
         <div class="d-flex mt-2">
-          <input type="text" placeholder="Search" class="form-control me-2">
-          <button class="btn btn-outline-primary mx-2">Search</button>
-          <button class="btn btn-outline-success">Reset</button>
+          <!-- view child reference a search input value in ElementRef and pass the value to component -->
+          <input (keyup.enter)="onSearch()" type="text" placeholder="Search" class="form-control me-2" #search>
+          <button (click)="onSearch()" class="btn btn-outline-primary mx-2">Search</button>
+          <button (click)="onReset()" class="btn btn-outline-success">Reset</button>
         </div>
       </div>
       <!-- list of product items in cards -->
@@ -43,17 +45,11 @@
       </div>
       <!-- Paging -->
       <div class="d-flex justify-content-center" *ngIf="totalCount > 0">
-        <pagination 
-          [boundaryLinks]="true" 
-          [totalItems]="totalCount" 
-          [itemsPerPage]="shopParams.pageSize"
-          [maxSize]="10"
-          (pageChanged)="onPageChanged($event)"
-          previousText="&rsaquo;" 
-          nextText="&rsaquo;"
-          firstText="&laquo;"
-          lastText="&raquo;">
-        </pagination>
+        <!-- output from parent app-pager -->
+        <app-pager 
+        [totalCount]="totalCount"
+        [pageSize]="shopParams.pageSize"
+        (pageChanged)="onPageChanged($event)"></app-pager>
       </div>
     </section>
   </div>
