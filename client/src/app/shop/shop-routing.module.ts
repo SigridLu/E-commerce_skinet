@@ -7,7 +7,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 // shop-routing module takes care of routing on shop page, allow lazy loading on components(i.e. ProductDetailsComponent).
 const routes: Routes = [
   { path: '', component: ShopComponent },
-  { path: ':id', component: ProductDetailsComponent },
+  { path: ':id', component: ProductDetailsComponent, data: {breadcrumb: {alias: 'productDetails'}} },
 ]
 
 @NgModule({
