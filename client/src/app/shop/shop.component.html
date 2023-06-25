@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row">
-
+  <!-- Load the filter bar after receiving data -->
+  <div class="row" *ngIf="types.length > 0 && brands.length > 0">
     <!-- filters -->
     <section class="col-3">
       <!-- sort -->

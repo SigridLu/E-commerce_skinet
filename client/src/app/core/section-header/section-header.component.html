@@ -1,7 +1,7 @@
 <!-- Use async pipe to automatically subscribe/unsubscribe the breadcrumb service observables (in array form) and give it an alias name: breadcrumb -->
 <ng-container *ngIf="$any(bcService.breadcrumbs$ | async) as breadcrumbs">
   <!-- Add a condition to remove breadcrumb while in Home page -->
-  <section *ngIf="breadcrumbs[breadcrumbs.length-1].label !== 'Home'" class="py-5" style="margin-top: 105px; background-color: #f5f5f5;">
+  <section *ngIf="breadcrumbs[breadcrumbs.length-1].label !== 'Home'" class="py-5 mb-3" style="margin-top: 105px; background-color: #f5f5f5;">
     <div class="container">
       <div class="row d-flex align-items center">
         <div class="col-9">
