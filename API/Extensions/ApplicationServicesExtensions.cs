@@ -31,6 +31,7 @@ namespace API.Extensions
             });
 
             // Inject Repository
+            services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); // register generic type of service
             services.AddScoped<IProductRepository, ProductRepository>();
 
