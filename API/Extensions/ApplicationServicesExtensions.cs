@@ -2,6 +2,7 @@ using API.Errors;
 using Core.Contract.Repository;
 using Infrastructure.Data;
 using Infrastructure.Data.Repository;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
@@ -34,6 +35,9 @@ namespace API.Extensions
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); // register generic type of service
             services.AddScoped<IProductRepository, ProductRepository>();
+
+            // Inject Service
+            services.AddScoped<ITokenService, TokenService>();
 
             // Inject AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
