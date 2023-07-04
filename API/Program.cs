@@ -15,6 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 
+builder.Services.AddSwaggerDocumentation();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,8 +29,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 // This demo is for 'no found endpoint' request where the request calls the endpoint that doen't exist.
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
-app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerDocumentation();
 
 // Configure to serve static files
 app.UseStaticFiles();
