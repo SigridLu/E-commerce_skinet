@@ -1,0 +1,24 @@
+<div class="d-flex justify-content-center mt-5">
+    <div class="col-3">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="text-center mb-4">
+                <h1 class="mb-3">Login</h1>
+            </div>
+            <app-text-input [formControl]="loginForm.controls['email']" [label]="'Email Address'"></app-text-input>
+            <app-text-input [formControl]="loginForm.controls['password']" [label]="'Password'"
+                [type]="'password'"></app-text-input>
+            <div class="d-grid">
+                <button [disabled]="loginForm.invalid" class="btn btn-lg btn-primary mt-3" type="submit">Sign
+                    in</button>
+            </div>
+        </form>
+    </div>
+    <!-- Debug: check form status -->
+    <!-- <div class="col-4 ms-5">
+      <p>Form Status: {{loginForm.status}}</p>
+      <p>Eamil Status: {{loginForm.get('email')?.status}}</p>
+      <p>Email Touched: {{loginForm.get('email')?.touched}}</p>
+      <p>Email Dirty: {{loginForm.get('email')?.dirty}}</p>
+      <pre>{{loginForm.value | json}}</pre>
+    </div> -->
+</div>
