@@ -14,7 +14,10 @@ export class LoadingInterceptor implements HttpInterceptor {
   constructor(private busyService: BusyService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.busyService.busy();
+    // Get rid of the full-page loading while checking e-mail exist async validation is working at register page.
+    if (!request.url.includes('emailExists')) {
+      this.busyService.busy();
+    }
     return next.handle(request).pipe(
       delay(1000),
       finalize(() => this.busyService.idle())

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from '../account.service';
 import { Router } from '@angular/router';
+import { debounceTime, finalize, map, switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,7 @@ export class RegisterComponent {
 
   registerForm = this.fb.group({
     displayName: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.email], [this.validateEmailNotTaken()]],
     password: ['', [Validators.required, Validators.pattern(this.complexPassword)]],
   })  
 
@@ -26,5 +27,22 @@ export class RegisterComponent {
       next: () => this.router.navigateByUrl('/shop'),
       error: error => this.errors = error.errors
     })
+  }
+
+  // Create a async validator to check if the email already being used. This validator fires only if sync validations are passed.
+  validateEmailNotTaken(): AsyncValidatorFn {
+    return (control: AbstractControl) => {
+      return control.valueChanges.pipe(
+        // Delay 1 sec to send async validation to the server after user typing in the input field.
+        debounceTime(1000),
+        take(1),
+        switchMap(() => {
+          return this.accountService.checkEmailExists(control.value).pipe(
+            map(result => result ? {emailExists: true} : null),
+            finalize(() => control.markAsTouched())
+          )
+        })
+      )
+    }
   }
 }
