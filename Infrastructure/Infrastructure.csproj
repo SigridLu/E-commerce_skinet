@@ -1,14 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.7" />
+  <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+  <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.8" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.8" />
+  <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.31.0" />
   <PackageReference Include="StackExchange.Redis" Version="2.6.116" />
+  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
